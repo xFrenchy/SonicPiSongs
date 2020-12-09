@@ -2,15 +2,6 @@ use_synth :chiplead
 use_bpm 100
 # I am following this for the musical notes: https://www.hooktheory.com/theorytab/view/runescape/sea-shanty2
 
-comment do
-  note = 0
-  128.times do
-    play note
-    note += 1
-    sleep 0.125
-  end
-end
-
 
 define :intro do
   # The intro is divided into 4 parts
@@ -33,70 +24,62 @@ define :intro do
     sleep sleep_time
   end
   
+  i = 0
+  square2_notes = [:Fs, :E, :D, :Cs, :Cs, :B3, :Cs, :D]
+  8.times do
+    # 3 exceptions for this loop at i = 1, i = 2, i = 7
+    play(square2_notes[i])
+    sleep_time = 0.5
+    
+    if i == 1 or i == 2
+      sleep_time -= 0.25
+    end
+    
+    if i == 7
+      sleep_time += 0.5
+    end
+    
+    i += 1
+    sleep sleep_time
+  end
   
-  play :Fs
-  sleep 0.5
-  play :E
-  sleep 0.25
-  play :D
-  sleep 0.25
-  play :Cs
-  sleep 0.5
-  play :Cs
-  sleep 0.5
-  play :B3 #It's :B but an octave lower, gotta be a better way to write this
-  sleep 0.5
-  play :Cs
-  sleep 0.5
-  play :D, sustain: 0.5
-  sleep 1
+  i = 0
+  square3_notes = [:A, :E, :D, :Cs, :Cs, :D, :E, :Fs, :D]
+  9.times do
+    # There are 3 exception for this loop at i = 0, i = 3, i = 8
+    play(square3_notes[i])
+    sleep_time = 0.25
+    
+    if i == 0
+      sleep_time += 0.25
+    end
+    
+    if i == 3 or i == 8
+      sleep_time += 0.5
+    end
+    
+    i += 1
+    sleep sleep_time
+    
+  end
   
-  play :A
-  sleep 0.5
-  play :E
-  sleep 0.25
-  play :D
-  sleep 0.25
-  play :Cs, sustain: 0.5
-  sleep 0.75
-  play :Cs
-  sleep 0.25
-  play :D
-  sleep 0.25
-  play :E
-  sleep 0.25
-  play :Fs
-  sleep 0.25
-  play :D, sustain: 0.5
-  sleep 0.75
+  i = 0
+  square4_notes = [:Fs, :E, :D, :Cs, :B3, :Cs, :D, :Fs, :E, :D, :Cs, :B3, :A3]
+  13.times do
+    # There is a SINGULAR exepction for this loop weee
+    #and it's at the end so technically I don't need to include it in the loop
+    play(square4_notes[i])
+    sleep_time = 0.25
+    
+    if i == 12
+      sleep_time += 0.75
+    end
+    
+    i += 1
+    sleep sleep_time
+    
+  end
   
-  
-  play :Fs
-  sleep 0.25
-  play :E
-  sleep 0.25
-  play :D
-  sleep 0.25
-  play :Cs
-  sleep 0.25
-  play :B3
-  sleep 0.25
-  play :Cs
-  sleep 0.25
-  play :D
-  sleep 0.25
-  play :Fs
-  sleep 0.25
-  play :E
-  sleep 0.25
-  play :D
-  sleep 0.25
-  play :Cs
-  sleep 0.25
-  play :B3
-  sleep 0.25
-  play :A3, sustain: 0.5
-  sleep 1
 end
 
 intro
